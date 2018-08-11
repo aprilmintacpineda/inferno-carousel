@@ -1,0 +1,95 @@
+/** @format */
+
+* {
+  text-align: left;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 50px;
+  font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode',
+    tahoma, sans-serif;
+}
+
+code {
+  margin: 20px 0;
+  display: block;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 20px;
+}
+
+code code {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  background-color: transparent;
+}
+
+.clear-float:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.box {
+  width: 80vw;
+  padding: 10px;
+  border: 1px solid #d0d1d5;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+/* carousel that's inside a container with images in it. */
+.images-carousel {
+  float: left;
+  width: 50vw;
+  margin-right: 5px;
+}
+
+.images-carousel img {
+  width: 100%;
+  height: 200px;
+}
+
+/* carousel with a different container */
+
+.carousel-with-different-content .item,
+.carousel-with-different-content-2 .item {
+  display: block;
+  background-color: #006699;
+  color: #ffffff;
+  width: 100%;
+  height: 0;
+  padding-bottom: 30%;
+}
+
+.carousel-with-different-content-2 .item {
+  padding-bottom: 50%;
+}
+
+.carousel-with-different-content .item.item-2,
+.carousel-with-different-content-2 .item.item-2 {
+  background-color: cornflowerblue;
+}
+
+.carousel-with-different-content .item.item-3,
+.carousel-with-different-content-2 .item.item-3 {
+  background-color: blueviolet;
+}
+
+.carousel-with-different-content .item p,
+.carousel-with-different-content-2 .item p {
+  padding: 20px;
+  display: block;
+  white-space: pre-wrap;
+}
+
+.carousel-with-different-content-2 img {
+  padding: 50px;
+  width: 100%;
+  height: 300px;
+}

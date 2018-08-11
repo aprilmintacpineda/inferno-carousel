@@ -1,0 +1,39 @@
+/** @format */
+
+.carousel-container {
+  position: relative;
+  .carousel-item-list-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel-item-list {
+    position: relative;
+    white-space: nowrap;
+    top: 0;
+    left: 0;
+    .carousel-item {
+      display: inline-block;
+      width: 100%;
+      vertical-align: top;
+    }
+  }
+  .pagination {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .bullet {
+      width: 7px;
+      height: 7px;
+      margin: 4px;
+      display: inline-block;
+      border-radius: 100%;
+      background-color: #d3dee3;
+    }
+    .active {
+      background-color: #2a8fbd;
+    }
+  }
+}
