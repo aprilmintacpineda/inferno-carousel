@@ -2,7 +2,9 @@
 
 # inferno-carousel
 
-Carousel component for infernojs
+Carousel component for infernojs.
+
+See [Demo](https://aprilmintacpineda.github.io/inferno-carousel/).
 
 ## install
 
