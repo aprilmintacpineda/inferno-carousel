@@ -1,0 +1,123 @@
+/** @format */
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 80px;
+}
+
+.App-header {
+  background-color: #f8f8f8;
+  height: 150px;
+  padding: 20px;
+  color: #3d464d;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+code {
+  color: #e73a37;
+}
+.carousel-container{position:relative}.carousel-container .carousel-item-list-wrapper{position:relative;overflow:hidden}.carousel-container .carousel-item-list{position:relative;white-space:nowrap;top:0;left:0}.carousel-container .carousel-item-list .carousel-item{display:inline-block;width:100%;vertical-align:top}.carousel-container .pagination{position:absolute;bottom:12px;width:100%;display:-ms-flexbox;display:flex;-ms-flex-align:center;align-items:center;-ms-flex-pack:center;justify-content:center}.carousel-container .pagination .bullet{width:7px;height:7px;margin:4px;display:inline-block;border-radius:100%;background-color:#d3dee3}.carousel-container .pagination .active{background-color:#2a8fbd}
+/** @format */
+
+* {
+  text-align: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 50px;
+  font-family: 'Open Sans', 'lucida grande', 'Segoe UI', arial, verdana, 'lucida sans unicode',
+    tahoma, sans-serif;
+}
+
+code {
+  margin: 20px 0;
+  display: block;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 20px;
+}
+
+code code {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+  background-color: transparent;
+}
+
+.clear-float:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+.box {
+  width: 80vw;
+  padding: 10px;
+  border: 1px solid #d0d1d5;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+/* carousel that's inside a container with images in it. */
+.images-carousel {
+  float: left;
+  width: 50vw;
+  margin-right: 5px;
+}
+
+.images-carousel img {
+  width: 100%;
+  height: 200px;
+}
+
+/* carousel with a different container */
+
+.carousel-with-different-content .item,
+.carousel-with-different-content-2 .item {
+  display: block;
+  background-color: #006699;
+  color: #ffffff;
+  width: 100%;
+  height: 0;
+  padding-bottom: 30%;
+}
+
+.carousel-with-different-content-2 .item {
+  padding-bottom: 50%;
+}
+
+.carousel-with-different-content .item.item-2,
+.carousel-with-different-content-2 .item.item-2 {
+  background-color: cornflowerblue;
+}
+
+.carousel-with-different-content .item.item-3,
+.carousel-with-different-content-2 .item.item-3 {
+  background-color: blueviolet;
+}
+
+.carousel-with-different-content .item p,
+.carousel-with-different-content-2 .item p {
+  padding: 20px;
+  display: block;
+  white-space: pre-wrap;
+}
+
+.carousel-with-different-content-2 img {
+  padding: 50px;
+  width: 100%;
+  height: 300px;
+}
+
+/*# sourceMappingURL=main.c116a04d.css.map*/
