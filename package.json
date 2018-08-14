@@ -1,6 +1,6 @@
 {
   "name": "inferno-carousel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Carousel component for infernojs",
   "main": "lib/index.js",
   "files": [
