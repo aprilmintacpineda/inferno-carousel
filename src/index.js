@@ -130,8 +130,6 @@ export default class Carousel extends Component {
   };
 
   touchmove = ev => {
-    ev.preventDefault();
-
     if (!this.moving && this.touchDetection.started) {
       this.touchDetection = ObjectAssign(this.touchDetection, {
         endX: this.resolveX(ev)
