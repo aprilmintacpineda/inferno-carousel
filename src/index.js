@@ -11,11 +11,12 @@ export default class Carousel extends Component {
     carouselItems.unshift(this.props.children[this.props.children.length - 1]);
     carouselItems.push(this.props.children[0]);
 
+    this.resizing = false;
     this.shouldNotAutoPlay = false;
     this.currentXPosition = 0;
     this.lastClientWidth = 0;
     this.carouselItems = carouselItems;
-    this.timeout = null;
+    this.interval = null;
     this.moving = false;
     this.touchDetection = {
       started: false,
@@ -77,7 +78,9 @@ export default class Carousel extends Component {
   };
 
   switchCurrentItem = () => {
-    if (!this.shouldNotAutoPlay) {
+    if (this.shouldNotAutoPlay) {
+      this.stopCarousel();
+    } else {
       this.moving = true;
       const newItemIndex = this.nextItem();
 
@@ -89,28 +92,25 @@ export default class Carousel extends Component {
           setTimeout(() => {
             if (this.carouselItemsList) {
               this.simulateInfiniteScroll(newItemIndex);
-              this.playCarousel();
             }
             this.moving = false;
           }, 310)
       );
-    } else {
-      this.stopCarousel();
     }
   };
 
   stopCarousel = () => {
-    if (this.timeout) {
+    if (this.interval) {
       this.shouldNotAutoPlay = true;
-      clearTimeout(this.timeout);
-      this.timeout = null;
+      clearInterval(this.interval);
+      this.interval = null;
     }
   };
 
   playCarousel = () => {
     this.stopCarousel();
+    this.interval = setInterval(this.switchCurrentItem, 3000);
     this.shouldNotAutoPlay = false;
-    this.timeout = setTimeout(this.switchCurrentItem, 2500);
   };
 
   resolveX = ev => {
@@ -178,7 +178,7 @@ export default class Carousel extends Component {
       }
 
       this.shouldNotAutoPlay = false;
-      this.timeout = setTimeout(this.playCarousel, 2500);
+      setTimeout(this.playCarousel, 3000);
     }
 
     this.touchDetection = {
@@ -191,18 +191,18 @@ export default class Carousel extends Component {
   preventDrag = ev => ev.preventDefault();
 
   resized = () => {
-    function adjustView () {
-      if (!this.carouselItemsList) {
+    const adjustView = () => {
+      if (!this.carouselItemsList || this.moving) {
         setTimeout(adjustView, 300);
       } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
+        this.resizing = false;
         this.lastClientWidth = this.carouselItemsList.clientWidth;
         this.scrollTo(this.state.currentItemIndex);
       }
-    }
+    };
 
     this.stopCarousel();
-
-    setTimeout(adjustView, 1);
+    setTimeout(adjustView, 0);
   };
 
   componentWillUnmount = () => {
