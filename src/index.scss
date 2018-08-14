@@ -11,6 +11,8 @@
     white-space: nowrap;
     top: 0;
     left: 0;
+    // transform hack for Hardware Acceleration
+    transform: translateZ(0);
     .carousel-item {
       display: inline-block;
       width: 100%;
