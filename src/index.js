@@ -3,6 +3,7 @@
 import './index.css';
 import { Component } from 'inferno';
 import ObjectAssign from 'object-assign';
+import raf from 'raf';
 
 export default class Carousel extends Component {
   constructor (props) {
@@ -100,17 +101,27 @@ export default class Carousel extends Component {
   };
 
   stopCarousel = () => {
-    if (this.interval) {
+    if (this.rafId) {
       this.shouldNotAutoPlay = true;
-      clearInterval(this.interval);
-      this.interval = null;
+      raf.cancel(this.rafId);
     }
   };
 
   playCarousel = () => {
     this.stopCarousel();
-    this.interval = setInterval(this.switchCurrentItem, 3000);
     this.shouldNotAutoPlay = false;
+    this.lastTime = Date.now();
+
+    const player = () => {
+      if ((Date.now() - this.lastTime) / 1000 >= 3) {
+        this.switchCurrentItem();
+        this.lastTime = Date.now();
+      }
+
+      this.rafId = raf(player);
+    };
+
+    player();
   };
 
   resolveX = ev => {
