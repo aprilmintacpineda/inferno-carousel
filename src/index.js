@@ -29,6 +29,20 @@ export default class Carousel extends Component {
     };
   }
 
+  timeout = (callback, ms) => {
+    const lastTime = Date.now();
+
+    function tick () {
+      if (Date.now() - lastTime > ms) {
+        callback();
+      } else {
+        raf(tick);
+      }
+    }
+
+    tick();
+  };
+
   simulateInfiniteScroll = newItemIndex => {
     if (this.carouselItemsList) {
       this.carouselItemsList.style.transition = '';
@@ -90,7 +104,7 @@ export default class Carousel extends Component {
           currentItemIndex: newItemIndex === this.props.children.length ? 0 : newItemIndex
         },
         () =>
-          setTimeout(() => {
+          this.timeout(() => {
             if (this.carouselItemsList) {
               this.simulateInfiniteScroll(newItemIndex);
             }
@@ -113,7 +127,7 @@ export default class Carousel extends Component {
     this.lastTime = Date.now();
 
     const player = () => {
-      if ((Date.now() - this.lastTime) / 1000 >= 3) {
+      if (Date.now() - this.lastTime >= 3000) {
         this.switchCurrentItem();
         this.lastTime = Date.now();
       }
@@ -165,7 +179,7 @@ export default class Carousel extends Component {
               currentItemIndex: newItemIndex === this.props.children.length ? 0 : newItemIndex
             },
             () =>
-              setTimeout(() => {
+              this.timeout(() => {
                 this.simulateInfiniteScroll(newItemIndex);
               }, 301)
           );
@@ -176,7 +190,7 @@ export default class Carousel extends Component {
               currentItemIndex: newItemIndex < 0 ? this.props.children.length - 1 : newItemIndex
             },
             () =>
-              setTimeout(() => {
+              this.timeout(() => {
                 this.simulateInfiniteScroll(newItemIndex);
               }, 301)
           );
@@ -187,7 +201,7 @@ export default class Carousel extends Component {
       }
 
       this.shouldNotAutoPlay = false;
-      setTimeout(this.playCarousel, 3000);
+      this.timeout(this.playCarousel, 3000);
     }
 
     this.touchDetection = {
@@ -202,7 +216,7 @@ export default class Carousel extends Component {
   resized = () => {
     const adjustView = () => {
       if (!this.carouselItemsList || this.moving) {
-        setTimeout(adjustView, 300);
+        this.timeout(adjustView, 300);
       } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
         this.resizing = false;
         this.lastClientWidth = this.carouselItemsList.clientWidth;
@@ -211,7 +225,7 @@ export default class Carousel extends Component {
     };
 
     this.stopCarousel();
-    setTimeout(adjustView, 0);
+    this.timeout(adjustView, 0);
   };
 
   componentWillUnmount = () => {
