@@ -12,6 +12,16 @@ export default class Carousel extends Component {
     carouselItems.unshift(this.props.children[this.props.children.length - 1]);
     carouselItems.push(this.props.children[0]);
 
+    // Note that there are devices that are both touchable and can have a mouse
+    if (
+      'ontouchstart' in window ||
+      (window.DocumentTouch && document instanceof window.DocumentTouch)
+    ) {
+      this.isTouchEnabledDevice = true;
+    } else {
+      this.isTouchEnabledDevice = false;
+    }
+
     this.resizing = false;
     this.shouldNotAutoPlay = false;
     this.currentXPosition = 0;
@@ -146,6 +156,16 @@ export default class Carousel extends Component {
   touchstart = ev => {
     this.stopCarousel();
     this.shouldNotAutoPlay = true;
+
+    if (ev instanceof MouseEvent) {
+      this.touchTarget.addEventListener('mousemove', this.touchmove);
+      this.touchTarget.addEventListener('mouseup', this.touchend);
+      this.touchTarget.addEventListener('mouseout', this.touchend);
+    } else {
+      this.touchTarget.addEventListener('touchmove', this.touchmove);
+      this.touchTarget.addEventListener('touchend', this.touchend);
+    }
+
     this.touchDetection = {
       started: true,
       startX: this.resolveX(ev),
@@ -166,6 +186,15 @@ export default class Carousel extends Component {
   };
 
   touchend = ev => {
+    if (ev instanceof MouseEvent) {
+      this.touchTarget.removeEventListener('mousemove', this.touchmove);
+      this.touchTarget.removeEventListener('mouseup', this.touchend);
+      this.touchTarget.removeEventListener('mouseout', this.touchend);
+    } else {
+      this.touchTarget.removeEventListener('touchmove', this.touchmove);
+      this.touchTarget.removeEventListener('touchend', this.touchend);
+    }
+
     if (!this.moving && this.touchDetection.started) {
       this.touchDetection = ObjectAssign(this.touchDetection, {
         endX: this.resolveX(ev)
@@ -229,16 +258,10 @@ export default class Carousel extends Component {
   };
 
   componentWillUnmount = () => {
-    this.touchTarget.removeEventListener('dragstart', this.preventDrag);
-
+    if (this.isTouchEnabledDevice)
+      this.touchTarget.removeEventListener('touchstart', this.touchstart);
     this.touchTarget.removeEventListener('mousedown', this.touchstart);
-    this.touchTarget.removeEventListener('mousemove', this.touchmove);
-    this.touchTarget.removeEventListener('mouseup', this.touchend);
-    this.touchTarget.removeEventListener('mouseout', this.touchend);
-
-    this.touchTarget.removeEventListener('touchstart', this.touchstart);
-    this.touchTarget.removeEventListener('touchmove', this.touchmove);
-    this.touchTarget.removeEventListener('touchend', this.touchend);
+    this.touchTarget.removeEventListener('dragstart', this.preventDrag);
 
     window.removeEventListener('resize', this.resized);
     this.stopCarousel();
@@ -248,16 +271,10 @@ export default class Carousel extends Component {
     window.addEventListener('resize', this.resized);
 
     this.playCarousel();
-    this.touchTarget.addEventListener('dragstart', this.preventDrag);
 
+    if (this.isTouchEnabledDevice) this.touchTarget.addEventListener('touchstart', this.touchstart);
     this.touchTarget.addEventListener('mousedown', this.touchstart);
-    this.touchTarget.addEventListener('mousemove', this.touchmove);
-    this.touchTarget.addEventListener('mouseup', this.touchend);
-    this.touchTarget.addEventListener('mouseout', this.touchend);
-
-    this.touchTarget.addEventListener('touchstart', this.touchstart);
-    this.touchTarget.addEventListener('touchmove', this.touchmove);
-    this.touchTarget.addEventListener('touchend', this.touchend);
+    this.touchTarget.addEventListener('dragstart', this.preventDrag);
 
     this.lastClientWidth = this.carouselItemsList.clientWidth;
     this.currentXPosition = this.currentXPosition + this.lastClientWidth;
