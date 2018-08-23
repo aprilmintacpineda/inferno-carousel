@@ -258,13 +258,14 @@ export default class Carousel extends Component {
   };
 
   componentWillUnmount = () => {
-    if (this.isTouchEnabledDevice)
-      this.touchTarget.removeEventListener('touchstart', this.touchstart);
+    this.stopCarousel();
+
+    window.removeEventListener('resize', this.resized);
     this.touchTarget.removeEventListener('mousedown', this.touchstart);
     this.touchTarget.removeEventListener('dragstart', this.preventDrag);
 
-    window.removeEventListener('resize', this.resized);
-    this.stopCarousel();
+    if (this.isTouchEnabledDevice)
+      this.touchTarget.removeEventListener('touchstart', this.touchstart);
   };
 
   componentDidMount = () => {
