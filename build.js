@@ -40,6 +40,6 @@ fs.writeFileSync(
   __dirname + '/lib/index.min.js',
   babelCore.transform(content, {
     presets: ['minify']
-  }),
+  }).code,
   'utf8'
 );

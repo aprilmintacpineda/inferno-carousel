@@ -229,19 +229,19 @@ var Carousel = function (_Component) {
       return ev.preventDefault();
     };
 
-    _this.resized = function () {
-      function adjustView() {
-        if (!this.carouselItemsList || this.moving) {
-          this.timeout(adjustView, 300);
-        } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
-          this.resizing = !1;
-          this.lastClientWidth = this.carouselItemsList.clientWidth;
-          this.scrollTo(this.state.currentItemIndex);
-        }
+    _this.adjustView = function () {
+      if (!_this.carouselItemsList || _this.moving) {
+        _this.timeout(_this.adjustView, 300);
+      } else if (_this.lastClientWidth !== _this.carouselItemsList.clientWidth) {
+        _this.resizing = !1;
+        _this.lastClientWidth = _this.carouselItemsList.clientWidth;
+        _this.scrollTo(_this.state.currentItemIndex);
       }
+    };
 
+    _this.resized = function () {
       _this.stopCarousel();
-      _this.timeout(adjustView, 0);
+      _this.timeout(_this.adjustView, 1);
     };
 
     _this.componentWillUnmount = function () {

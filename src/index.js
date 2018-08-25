@@ -242,19 +242,19 @@ export default class Carousel extends Component {
 
   preventDrag = ev => ev.preventDefault();
 
-  resized = () => {
-    function adjustView () {
-      if (!this.carouselItemsList || this.moving) {
-        this.timeout(adjustView, 300);
-      } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
-        this.resizing = false;
-        this.lastClientWidth = this.carouselItemsList.clientWidth;
-        this.scrollTo(this.state.currentItemIndex);
-      }
+  adjustView = () => {
+    if (!this.carouselItemsList || this.moving) {
+      this.timeout(this.adjustView, 300);
+    } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
+      this.resizing = false;
+      this.lastClientWidth = this.carouselItemsList.clientWidth;
+      this.scrollTo(this.state.currentItemIndex);
     }
+  };
 
+  resized = () => {
     this.stopCarousel();
-    this.timeout(adjustView, 0);
+    this.timeout(this.adjustView, 1);
   };
 
   componentWillUnmount = () => {
