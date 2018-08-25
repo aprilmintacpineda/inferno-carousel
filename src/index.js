@@ -54,7 +54,9 @@ export default class Carousel extends Component {
   };
 
   simulateInfiniteScroll = newItemIndex => {
-    if (this.carouselItemsList) {
+    if (!this.carouselItemsList) {
+      this.timeout(this.simulateInfiniteScroll, 300);
+    } else {
       this.carouselItemsList.style.transition = '';
       if (newItemIndex === this.props.children.length) {
         this.currentXPosition = this.carouselItemsList.clientWidth;
@@ -115,9 +117,7 @@ export default class Carousel extends Component {
         },
         () =>
           this.timeout(() => {
-            if (this.carouselItemsList) {
-              this.simulateInfiniteScroll(newItemIndex);
-            }
+            this.simulateInfiniteScroll(newItemIndex);
             this.moving = false;
           }, 310)
       );
@@ -210,7 +210,7 @@ export default class Carousel extends Component {
             () =>
               this.timeout(() => {
                 this.simulateInfiniteScroll(newItemIndex);
-              }, 301)
+              }, 310)
           );
         } else {
           const newItemIndex = this.previousItem();
@@ -221,7 +221,7 @@ export default class Carousel extends Component {
             () =>
               this.timeout(() => {
                 this.simulateInfiniteScroll(newItemIndex);
-              }, 301)
+              }, 310)
           );
         }
       } else {
@@ -243,7 +243,7 @@ export default class Carousel extends Component {
   preventDrag = ev => ev.preventDefault();
 
   resized = () => {
-    const adjustView = () => {
+    function adjustView () {
       if (!this.carouselItemsList || this.moving) {
         this.timeout(adjustView, 300);
       } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
@@ -251,7 +251,7 @@ export default class Carousel extends Component {
         this.lastClientWidth = this.carouselItemsList.clientWidth;
         this.scrollTo(this.state.currentItemIndex);
       }
-    };
+    }
 
     this.stopCarousel();
     this.timeout(adjustView, 0);
