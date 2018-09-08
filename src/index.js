@@ -6,7 +6,7 @@ import ObjectAssign from 'object-assign';
 import raf from 'raf';
 
 export default class Carousel extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     const carouselItems = [].concat(this.props.children);
     carouselItems.unshift(this.props.children[this.props.children.length - 1]);
@@ -34,15 +34,13 @@ export default class Carousel extends Component {
       startX: null,
       endX: null
     };
-    this.state = {
-      currentItemIndex: 0
-    };
+    this.currentItemIndex = 0;
   }
 
   timeout = (callback, ms) => {
     const lastTime = Date.now();
 
-    function tick () {
+    function tick() {
       if (Date.now() - lastTime > ms) {
         callback();
       } else {
@@ -73,7 +71,9 @@ export default class Carousel extends Component {
     this.carouselItemsList.style.transition = 'transform 300ms';
     this.carouselItemsList.style.transform = `translate3d(-${this.currentXPosition}px, 0, 0)`;
 
-    return this.state.currentItemIndex + 1;
+    this[`carousel-pagination-${this.currentItemIndex}`].classList.remove('active');
+
+    return this.currentItemIndex + 1;
   };
 
   previousItem = () => {
@@ -81,7 +81,13 @@ export default class Carousel extends Component {
     this.carouselItemsList.style.transition = 'transform 300ms';
     this.carouselItemsList.style.transform = `translate3d(-${this.currentXPosition}px, 0, 0)`;
 
-    return this.state.currentItemIndex - 1;
+    this[`carousel-pagination-${this.currentItemIndex}`].classList.remove('active');
+
+    return this.currentItemIndex - 1;
+  };
+
+  updatePage = () => {
+    this[`carousel-pagination-${this.currentItemIndex}`].classList.add('active');
   };
 
   scrollTo = index => {
@@ -92,13 +98,8 @@ export default class Carousel extends Component {
     this.carouselItemsList.style.transition = 'transform 300ms';
     this.carouselItemsList.style.transform = `translate3d(-${this.currentXPosition}px, 0, 0)`;
 
-    if (this.state.currentItemIndex !== index) {
-      this.setState(
-        {
-          currentItemIndex: index
-        },
-        this.playCarousel
-      );
+    if (this.currentItemIndex !== index) {
+      this.currentItemIndex = index;
     } else {
       this.playCarousel();
     }
@@ -110,17 +111,12 @@ export default class Carousel extends Component {
     } else {
       this.moving = true;
       const newItemIndex = this.nextItem();
-
-      this.setState(
-        {
-          currentItemIndex: newItemIndex === this.props.children.length ? 0 : newItemIndex
-        },
-        () =>
-          this.timeout(() => {
-            this.simulateInfiniteScroll(newItemIndex);
-            this.moving = false;
-          }, 310)
-      );
+      this.currentItemIndex = newItemIndex === this.props.children.length ? 0 : newItemIndex;
+      this.updatePage();
+      this.timeout(() => {
+        this.simulateInfiniteScroll(newItemIndex);
+        this.moving = false;
+      }, 310);
     }
   };
 
@@ -203,26 +199,18 @@ export default class Carousel extends Component {
       if (Math.abs(this.touchDetection.startX - this.touchDetection.endX) >= 100) {
         if (this.touchDetection.startX > this.touchDetection.endX) {
           const newItemIndex = this.nextItem();
-          this.setState(
-            {
-              currentItemIndex: newItemIndex === this.props.children.length ? 0 : newItemIndex
-            },
-            () =>
-              this.timeout(() => {
-                this.simulateInfiniteScroll(newItemIndex);
-              }, 310)
-          );
+          this.currentItemIndex = newItemIndex === this.props.children.length ? 0 : newItemIndex;
+
+          this.timeout(() => {
+            this.simulateInfiniteScroll(newItemIndex);
+          }, 310);
         } else {
           const newItemIndex = this.previousItem();
-          this.setState(
-            {
-              currentItemIndex: newItemIndex < 0 ? this.props.children.length - 1 : newItemIndex
-            },
-            () =>
-              this.timeout(() => {
-                this.simulateInfiniteScroll(newItemIndex);
-              }, 310)
-          );
+          this.currentItemIndex = newItemIndex < 0 ? this.props.children.length - 1 : newItemIndex;
+
+          this.timeout(() => {
+            this.simulateInfiniteScroll(newItemIndex);
+          }, 310);
         }
       } else {
         this.carouselItemsList.style.transition = 'transform 300ms';
@@ -231,6 +219,7 @@ export default class Carousel extends Component {
 
       this.shouldNotAutoPlay = false;
       this.timeout(this.playCarousel, 3000);
+      this.updatePage();
     }
 
     this.touchDetection = {
@@ -248,7 +237,7 @@ export default class Carousel extends Component {
     } else if (this.lastClientWidth !== this.carouselItemsList.clientWidth) {
       this.resizing = false;
       this.lastClientWidth = this.carouselItemsList.clientWidth;
-      this.scrollTo(this.state.currentItemIndex);
+      this.scrollTo(this.currentItemIndex);
     }
   };
 
@@ -272,6 +261,8 @@ export default class Carousel extends Component {
     window.addEventListener('resize', this.resized);
 
     this.playCarousel();
+
+    this.updatePage();
 
     if (this.isTouchEnabledDevice) this.touchTarget.addEventListener('touchstart', this.touchstart);
     this.touchTarget.addEventListener('mousedown', this.touchstart);
@@ -306,10 +297,17 @@ export default class Carousel extends Component {
           </div>
         </div>
         <div className="pagination">
-          {this.props.children.map((child, i) => {
-            let className = 'clickable bullet';
-            if (i === this.state.currentItemIndex) className += ' active';
-            return <span key={i} className={className} onClick={() => this.scrollTo(i)} />;
+          {this.props.children.map((_, i) => {
+            return (
+              <span
+                key={i}
+                ref={el => {
+                  this[`carousel-pagination-${i}`] = el;
+                }}
+                className="clickable bullet"
+                onClick={() => this.scrollTo(i)}
+              />
+            );
           })}
         </div>
       </div>
