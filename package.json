@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-css": "node-sass-chokidar src/ -o src/ --output-style compressed",
     "build-js": "babel-node build.js",
-    "build": "npm run build-css && npm run build-js && npm run copy-over",
+    "build": "npm run lint && npm run build-css && npm run build-js && npm run copy-over",
     "copy-over": "cp lib/index.js example/src/lib/index.js && cp src/index.css lib/index.css && cp src/index.css example/src/lib/index.css",
     "prettier": "prettier \"src/**/*.{js,scss}\" --write",
     "eslint": "eslint \"src/**/*.js\" --fix",

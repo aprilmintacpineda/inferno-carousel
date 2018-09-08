@@ -6,7 +6,7 @@ import ObjectAssign from 'object-assign';
 import raf from 'raf';
 
 export default class Carousel extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     const carouselItems = [].concat(this.props.children);
     carouselItems.unshift(this.props.children[this.props.children.length - 1]);
@@ -40,7 +40,7 @@ export default class Carousel extends Component {
   timeout = (callback, ms) => {
     const lastTime = Date.now();
 
-    function tick() {
+    function tick () {
       if (Date.now() - lastTime > ms) {
         callback();
       } else {
@@ -133,7 +133,7 @@ export default class Carousel extends Component {
     this.lastTime = Date.now();
 
     const player = () => {
-      if (Date.now() - this.lastTime >= 3000) {
+      if (Date.now() - this.lastTime >= this.props.loopEvery * 1000) {
         this.switchCurrentItem();
         this.lastTime = Date.now();
       }
@@ -218,7 +218,7 @@ export default class Carousel extends Component {
       }
 
       this.shouldNotAutoPlay = false;
-      this.timeout(this.playCarousel, 3000);
+      this.playCarousel();
       this.updatePage();
     }
 
@@ -314,3 +314,7 @@ export default class Carousel extends Component {
     );
   };
 }
+
+Carousel.defaultProps = {
+  loopEvery: 3
+};
