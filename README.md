@@ -2,7 +2,7 @@
 
 # inferno-carousel
 
-Carousel component for infernojs.
+Carousel component for InfernoJS.
 
 See [Demo](https://aprilmintacpineda.github.io/inferno-carousel/).
 
