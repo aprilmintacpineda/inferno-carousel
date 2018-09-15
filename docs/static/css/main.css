@@ -1,29 +1,5 @@
 /** @format */
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 80px;
-}
-
-.App-header {
-  background-color: #f8f8f8;
-  height: 150px;
-  padding: 20px;
-  color: #3d464d;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-code {
-  color: #e73a37;
-}
-/** @format */
-
 * {
   text-align: left;
   -webkit-box-sizing: border-box;

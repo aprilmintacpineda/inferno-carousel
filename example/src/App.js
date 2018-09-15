@@ -1,8 +1,5 @@
 /** @format */
 
-import './registerServiceWorker';
-import './App.css';
-
 import { Component } from 'inferno';
 import InfernoCarousel from './lib';
 
