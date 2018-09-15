@@ -9,10 +9,18 @@ See [Demo](https://aprilmintacpineda.github.io/inferno-carousel/).
 ## install
 
 ```sh
-npm i -s inferno-carousel
+npm i -s inferno-carousel js-carousel
 ```
 
 ## Usage
+
+On your main entry file:
+
+```jsx
+import 'js-carousel';
+```
+
+Then, whenever you want to use the component.
 
 ```jsx
 import InfernoCarousel from 'inferno-carousel';
