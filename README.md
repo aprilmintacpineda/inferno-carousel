@@ -21,7 +21,7 @@ import InfernoCarousel from 'inferno-carousel';
 Then:
 
 ```jsx
-<InfernoCarousel>
+<InfernoCarousel animationSpeed={500} itemDuration={5000}>
   <img src="path-to-image" />
   <img src="path-to-image" />
   <img src="path-to-image" />
@@ -32,18 +32,7 @@ Then:
 
 You can also specify a `className` for the container of the carousel by providing a `className` prop to it.
 
-#### loopEvery
+- `animationSpeed` is the speed (in terms of milliseconds) of the transition animation.
+- `itemDuration` is the amount of time (in terms of milliseconds) it has to wait before transitioning to the next item.
 
-By default the carousel changes item every 3 seconds. You can override this behaviour by providing `loopEvery` prop that should be a number, like so.
-
-```jsx
-<InfernoCarousel loopEvery={5}>
-  <img src="path-to-image" />
-  <img src="path-to-image" />
-  <img src="path-to-image" />
-  <img src="path-to-image" />
-  <img src="path-to-image" />
-</InfernoCarousel>
-```
-
-In the example above the carousel would change item every 5 seconds.
+`inferno-carousel` uses [js-carousel](https://github.com/aprilmintacpineda/js-carousel).

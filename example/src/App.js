@@ -24,20 +24,20 @@ class App extends Component {
             </li>
             <li>
               The carousel is able to simulate an infinite scroll on the left and right side. That
-              means, you can infinitely scroll to right and you wouldn't see the carousel scroll
+              means, you can infinitely scroll to right and you {'wouldn\'t'} see the carousel scroll
               back to the first item.
             </li>
             <li>
-              The carousel doesn't care (or at least it's not suppose to) what you put inside of it
-              as it's children.{' '}
+              The carousel {'doesn\'t'} care (or at least {'it\'s'} not suppose to) what you put
+              inside of it as {'it\'s'} children.{' '}
               <strong>
-                But it's up to you to style them properly. The only job of the carousel is to pan
-                the items left to right.
+                But {'it\'s'} up to you to style them properly. The only job of the carousel is to
+                pan the items left to right.
               </strong>
             </li>
             <li>
               The carousel component is aimed to be as flexible as possible, you can put it anywhere
-              and then style it's container.
+              and then style {'it\'s'} container.
             </li>
           </ul>
 
@@ -50,7 +50,7 @@ class App extends Component {
         </div>
         <div className="clear-float box">
           <h1>Floating carousel</h1>
-          <InfernoCarousel className="images-carousel">
+          <InfernoCarousel animationSpeed={300} itemDuration={3000} className="images-carousel">
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
@@ -85,7 +85,10 @@ class App extends Component {
         <div className="box">
           <h1>Carousel with different content</h1>
 
-          <InfernoCarousel className="carousel-with-different-content">
+          <InfernoCarousel
+            animationSpeed={300}
+            itemDuration={3000}
+            className="carousel-with-different-content">
             <div className="item">
               <p>
                 Morbi convallis erat a imperdiet pharetra. Curabitur at volutpat lacus, et malesuada
@@ -121,7 +124,10 @@ class App extends Component {
 
           <br />
 
-          <InfernoCarousel className="carousel-with-different-content-2">
+          <InfernoCarousel
+            animationSpeed={300}
+            itemDuration={3000}
+            className="carousel-with-different-content-2">
             <div className="item">
               <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
               <p>
@@ -163,12 +169,12 @@ class App extends Component {
 
           <p>
             Since the carousel does not know what you are putting inside of it, you have to style
-            them to ensure that they fit properly. The carousel doesn't break, but of course the
-            contents inside of it will. It's Simple and easy. Just give the images width of 100%
-            then that's it, if images have different sizes, you have to ensure that their heights
-            fit as well. There's a trick that would allow you to have your images on the same sizes.
-            You can use the trick for variety of things like adding a placeholder for the image. It
-            goes something like this:
+            them to ensure that they fit properly. The carousel {'doesn\'t'} break, but of course the
+            contents inside of it will. {'It\'s'} Simple and easy. Just give the images width of 100%
+            then {'that\'s'} it, if images have different sizes, you have to ensure that their
+            heights fit as well. {'There\'s'} a trick that would allow you to have your images on the
+            same sizes. You can use the trick for variety of things like adding a placeholder for
+            the image. It goes something like this:
             <code>
               {'{'}
               <code>
@@ -181,7 +187,7 @@ class App extends Component {
             check the code for the Floating carousel example, I used it there.
           </p>
 
-          <InfernoCarousel>
+          <InfernoCarousel animationSpeed={300} itemDuration={3000}>
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
