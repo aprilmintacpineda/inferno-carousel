@@ -52,12 +52,7 @@ class App extends Component {
             animationSpeed={300}
             itemDuration={3000}
             className="images-carousel">
-            <img
-              onClick={() => {
-                alert('yow');
-              }}
-              src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1"
-            />
+            <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
           </InfernoCarousel>
