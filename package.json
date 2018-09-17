@@ -44,7 +44,7 @@
   "license": "MIT",
   "dependencies": {
     "inferno": "^5.6.1",
-    "js-carousel": "^1.0.3"
+    "js-carousel": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

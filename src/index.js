@@ -7,7 +7,8 @@ export default class Carousel extends Component {
     // eslint-disable-next-line
     jscarousel(this.carouselContainer, {
       animationSpeed: this.props.animationSpeed,
-      itemDuration: this.props.itemDuration
+      itemDuration: this.props.itemDuration,
+      swipeThreshold: this.props.swipeThreshold
     });
   }
 

@@ -47,8 +47,17 @@ class App extends Component {
         </div>
         <div className="clear-float box">
           <h1>Floating carousel</h1>
-          <InfernoCarousel animationSpeed={300} itemDuration={3000} className="images-carousel">
-            <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
+          <InfernoCarousel
+            swipeThreshold={150}
+            animationSpeed={300}
+            itemDuration={3000}
+            className="images-carousel">
+            <img
+              onClick={() => {
+                alert('yow');
+              }}
+              src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1"
+            />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
           </InfernoCarousel>
@@ -83,6 +92,7 @@ class App extends Component {
           <h1>Carousel with different content</h1>
 
           <InfernoCarousel
+            swipeThreshold={150}
             animationSpeed={300}
             itemDuration={3000}
             className="carousel-with-different-content">
@@ -122,6 +132,7 @@ class App extends Component {
           <br />
 
           <InfernoCarousel
+            swipeThreshold={150}
             animationSpeed={300}
             itemDuration={3000}
             className="carousel-with-different-content-2">
@@ -184,7 +195,7 @@ class App extends Component {
             check the code for the Floating carousel example, I used it there.
           </p>
 
-          <InfernoCarousel animationSpeed={300} itemDuration={3000}>
+          <InfernoCarousel swipeThreshold={150} animationSpeed={300} itemDuration={3000}>
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
             <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
