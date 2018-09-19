@@ -52,9 +52,18 @@ class App extends Component {
             animationSpeed={300}
             itemDuration={3000}
             className="images-carousel">
-            <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1" />
-            <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1" />
-            <img src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1" />
+            <img
+              onClick={() => console.log('Floating carousel: img 1')}
+              src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1"
+            />
+            <img
+              onClick={() => console.log('Floating carousel: img 2')}
+              src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1"
+            />
+            <img
+              onClick={() => console.log('Floating carousel: img 3')}
+              src="https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1"
+            />
           </InfernoCarousel>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis non est et
@@ -92,7 +101,7 @@ class App extends Component {
             itemDuration={3000}
             className="carousel-with-different-content">
             <div className="item">
-              <p>
+              <p onClick={() => console.log('Carousel with different content: p 1')}>
                 Morbi convallis erat a imperdiet pharetra. Curabitur at volutpat lacus, et malesuada
                 enim. Proin eget erat nibh. Etiam ac metus dignissim, tempor velit non, suscipit
                 orci. Vivamus bibendum nibh quis lectus pharetra iaculis. In gravida maximus
@@ -105,7 +114,7 @@ class App extends Component {
               </p>
             </div>
             <div className="item  item-2">
-              <p>
+              <p onClick={() => console.log('Carousel with different content: p 2')}>
                 Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
                 Curae; Nunc a rhoncus enim. Mauris euismod hendrerit tincidunt. Cras at velit magna.
                 Duis malesuada euismod justo, et luctus turpis elementum ut. Quisque sodales ex
@@ -113,7 +122,7 @@ class App extends Component {
               </p>
             </div>
             <div className="item  item-3">
-              <p>
+              <p onClick={() => console.log('Carousel with different content: p 3')}>
                 Nullam faucibus velit a eleifend interdum. Cras nisi eros, fringilla ac metus a,
                 ullamcorper aliquam ligula. Aliquam egestas purus ac lacus mollis, sodales cursus
                 nisi varius. Aenean accumsan quam ut ipsum faucibus, non cursus ante dignissim.
