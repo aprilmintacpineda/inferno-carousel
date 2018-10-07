@@ -1,8 +1,8 @@
 /** @format */
 
-import { Component } from 'inferno';
+import { createClass } from 'inferno-create-class';
 
-export default class Carousel extends Component {
+export default createClass({
   componentDidMount () {
     // eslint-disable-next-line
     jscarousel(this.carouselContainer, {
@@ -10,8 +10,7 @@ export default class Carousel extends Component {
       itemDuration: this.props.itemDuration,
       swipeThreshold: this.props.swipeThreshold
     });
-  }
-
+  },
   render () {
     return (
       <div
@@ -23,4 +22,4 @@ export default class Carousel extends Component {
       </div>
     );
   }
-}
+});
