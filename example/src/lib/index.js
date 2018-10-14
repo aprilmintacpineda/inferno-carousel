@@ -8,38 +8,45 @@ Object.defineProperty(exports, '__esModule', {
 
 var _inferno = require('inferno');
 
-var _infernoCreateClass = require('inferno-create-class');
+function InfernoCarousel (props) {
+  var _this = this;
+  _this.props = props;
 
-exports.default = (0, _infernoCreateClass.createClass)({
-  componentDidMount: function componentDidMount () {
-    // eslint-disable-next-line
-    jscarousel(this.carouselContainer, {
+  _this.componentDidMount = function () {
+    window.jscarousel(_this.carouselContainer, {
       noClone: !0,
-      animationSpeed: this.props.animationSpeed,
-      itemDuration: this.props.itemDuration,
-      swipeThreshold: this.props.swipeThreshold
+      animationSpeed: _this.props.animationSpeed,
+      itemDuration: _this.props.itemDuration,
+      swipeThreshold: _this.props.swipeThreshold
     });
-  },
-  componentDidUpdate: function componentDidUpdate () {
-    // eslint-disable-next-line
-    jscarousel(this.carouselContainer, {
-      noClone: !0,
-      animationSpeed: this.props.animationSpeed,
-      itemDuration: this.props.itemDuration,
-      swipeThreshold: this.props.swipeThreshold
-    });
-  },
-  render: function render () {
-    var _this = this;
+  };
 
+  _this.componentDidUpdate = function () {
+    window.jscarousel(_this.carouselContainer, {
+      noClone: !0,
+      animationSpeed: _this.props.animationSpeed,
+      itemDuration: _this.props.itemDuration,
+      swipeThreshold: _this.props.swipeThreshold
+    });
+  };
+
+  _this.render = function () {
     return (0, _inferno.createVNode)(
       1,
       'div',
-      this.props.className,
+      _this.props.className,
       [
-        this.props.children[this.props.children.length - 1],
-        this.props.children,
-        this.props.children[0]
+        (0, _inferno.createVNode)(
+          1,
+          'div',
+          null,
+          _this.props.children[_this.props.children.length - 1],
+          0
+        ),
+        _this.props.children.map(function (child, i) {
+          return (0, _inferno.createVNode)(1, 'div', null, child, 0, null, i);
+        }),
+        (0, _inferno.createVNode)(1, 'div', null, _this.props.children[0], 0)
       ],
       0,
       null,
@@ -48,6 +55,11 @@ exports.default = (0, _infernoCreateClass.createClass)({
         _this.carouselContainer = el;
       }
     );
-  }
-});
+  };
+}
 /** @format */
+
+InfernoCarousel.prototype = _inferno.Component.prototype;
+InfernoCarousel.prototype.constructor = InfernoCarousel;
+
+exports.default = InfernoCarousel;

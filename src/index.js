@@ -1,37 +1,47 @@
 /** @format */
 
-import { createClass } from 'inferno-create-class';
+import { Component } from 'inferno';
 
-export default createClass({
-  componentDidMount () {
-    // eslint-disable-next-line
-    jscarousel(this.carouselContainer, {
+function InfernoCarousel (props) {
+  const _this = this;
+  _this.props = props;
+
+  _this.componentDidMount = function () {
+    window.jscarousel(_this.carouselContainer, {
       noClone: true,
-      animationSpeed: this.props.animationSpeed,
-      itemDuration: this.props.itemDuration,
-      swipeThreshold: this.props.swipeThreshold
+      animationSpeed: _this.props.animationSpeed,
+      itemDuration: _this.props.itemDuration,
+      swipeThreshold: _this.props.swipeThreshold
     });
-  },
-  componentDidUpdate () {
-    // eslint-disable-next-line
-    jscarousel(this.carouselContainer, {
+  };
+
+  _this.componentDidUpdate = function () {
+    window.jscarousel(_this.carouselContainer, {
       noClone: true,
-      animationSpeed: this.props.animationSpeed,
-      itemDuration: this.props.itemDuration,
-      swipeThreshold: this.props.swipeThreshold
+      animationSpeed: _this.props.animationSpeed,
+      itemDuration: _this.props.itemDuration,
+      swipeThreshold: _this.props.swipeThreshold
     });
-  },
-  render () {
+  };
+
+  _this.render = function () {
     return (
       <div
-        className={this.props.className}
+        className={_this.props.className}
         ref={el => {
-          this.carouselContainer = el;
+          _this.carouselContainer = el;
         }}>
-        {this.props.children[this.props.children.length - 1]}
-        {this.props.children}
-        {this.props.children[0]}
+        <div>{_this.props.children[_this.props.children.length - 1]}</div>
+        {_this.props.children.map((child, i) => (
+          <div key={i}>{child}</div>
+        ))}
+        <div>{_this.props.children[0]}</div>
       </div>
     );
-  }
-});
+  };
+}
+
+InfernoCarousel.prototype = Component.prototype;
+InfernoCarousel.prototype.constructor = InfernoCarousel;
+
+export default InfernoCarousel;

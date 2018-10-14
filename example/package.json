@@ -8,6 +8,7 @@
     "js-carousel": "^1.3.3"
   },
   "scripts": {
+    "reinstallNodeModules": "rm -rf node_modules package-lock.json && npm i",
     "start": "inferno-scripts start",
     "build": "inferno-scripts build",
     "test": "inferno-scripts test --env=jsdom",
