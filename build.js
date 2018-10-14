@@ -1,45 +1,24 @@
 /** @format */
 
-var babelCore = require('babel-core');
+var babelCore = require('@babel/core');
 var fs = require('fs');
 
-const transforms = [
-  content =>
-    babelCore.transform(content, {
-      babelrc: false,
-      plugins: [
-        'minify-dead-code-elimination',
-        'transform-minify-booleans',
-        'minify-constant-folding',
-        'minify-flip-comparisons',
-        'transform-class-properties',
-        'babel-plugin-inferno',
-        'syntax-jsx'
-      ]
-    }),
-  content =>
-    babelCore.transform(content, {
-      babelrc: false,
-      presets: ['env', 'flow']
-    })
-];
+const source = fs.readFileSync('src/index.js', 'utf8');
 
-let content = fs.readFileSync('src/index.js', 'utf8').toString();
-
-for (
-  let transformsCopy = [].concat(transforms), transform = transformsCopy.shift();
-  Boolean(transform);
-  transform = transformsCopy.shift()
-) {
-  const result = transform(content);
-  content = result.code;
-}
-
-fs.writeFileSync(__dirname + '/lib/index.js', content, 'utf8');
+fs.writeFileSync(
+  __dirname + '/lib/index.js',
+  babelCore.transform(source, {
+    babelrc: false,
+    plugins: ['babel-plugin-inferno', '@babel/plugin-syntax-jsx'],
+    presets: ['@babel/preset-env', '@babel/preset-flow']
+  }).code,
+  'utf8'
+);
 fs.writeFileSync(
   __dirname + '/lib/index.min.js',
-  babelCore.transform(content, {
-    presets: ['env', 'minify']
+  babelCore.transform(source, {
+    plugins: ['babel-plugin-inferno', '@babel/plugin-syntax-jsx'],
+    presets: ['@babel/preset-env', '@babel/preset-flow', 'minify']
   }).code,
   'utf8'
 );

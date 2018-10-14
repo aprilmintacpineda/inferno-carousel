@@ -5,16 +5,19 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
+exports.default = void 0;
 
 var _inferno = require('inferno');
 
+/** @format */
 function InfernoCarousel (props) {
   var _this = this;
+
   _this.props = props;
 
   _this.componentDidMount = function () {
     window.jscarousel(_this.carouselContainer, {
-      noClone: !0,
+      noClone: true,
       animationSpeed: _this.props.animationSpeed,
       itemDuration: _this.props.itemDuration,
       swipeThreshold: _this.props.swipeThreshold
@@ -48,9 +51,8 @@ function InfernoCarousel (props) {
     );
   };
 }
-/** @format */
 
 InfernoCarousel.prototype = _inferno.Component.prototype;
 InfernoCarousel.prototype.constructor = InfernoCarousel;
-
-exports.default = InfernoCarousel;
+var _default = InfernoCarousel;
+exports.default = _default;
