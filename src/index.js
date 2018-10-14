@@ -15,15 +15,6 @@ function InfernoCarousel (props) {
     });
   };
 
-  _this.componentDidUpdate = function () {
-    window.jscarousel(_this.carouselContainer, {
-      noClone: true,
-      animationSpeed: _this.props.animationSpeed,
-      itemDuration: _this.props.itemDuration,
-      swipeThreshold: _this.props.swipeThreshold
-    });
-  };
-
   _this.render = function () {
     return (
       <div

@@ -5,25 +5,31 @@ import InfernoCarousel from './lib';
 
 class App extends Component {
   state = {
-    floatingCarouselImages: [
-      'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1',
-      'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1',
-      'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1'
-    ]
+    floatingCarouselImages: {
+      key: 0,
+      data: [
+        'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Feskipaper.com%2Fimages%2Frandom-wallpaper-8.jpg&f=1',
+        'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F6000000%2FRandom-random-6054526-1280-1024.jpg&f=1',
+        'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fimages2.fanpop.com%2Fimages%2Fphotos%2F5500000%2FRandom-wallpapers-random-5549791-1280-800.jpg&f=1'
+      ]
+    }
   };
 
   componentDidMount () {
     setTimeout(() => {
       this.setState({
-        floatingCarouselImages: [
-          'http://cdn.sheknows.com/articles/2013/06/25-random-cat-behaviors-finally-explained-01.jpg',
-          'https://i.ytimg.com/vi/VdWVz7_3gAI/hqdefault.jpg',
-          'http://images2.fanpop.com/image/photos/10900000/Photobombing-cat-random-10956798-406-594.jpg',
-          'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained',
-          'http://autofish.net/mirrors/images/animals/cats/cat_treat.jpg'
-        ]
+        floatingCarouselImages: {
+          key: this.state.floatingCarouselImages.key + 1,
+          data: [
+            'http://cdn.sheknows.com/articles/2013/06/25-random-cat-behaviors-finally-explained-01.jpg',
+            'https://i.ytimg.com/vi/VdWVz7_3gAI/hqdefault.jpg',
+            'http://images2.fanpop.com/image/photos/10900000/Photobombing-cat-random-10956798-406-594.jpg',
+            'http://cdn.skim.gs/images/Cat-looking-out-window_sy4cxp/25-random-cat-behaviors-finally-explained',
+            'http://autofish.net/mirrors/images/animals/cats/cat_treat.jpg'
+          ]
+        }
       });
-    }, 5000);
+    }, 15000);
   }
 
   render () {
@@ -31,8 +37,8 @@ class App extends Component {
       <div className="App">
         <div className="box">
           <p>
-            <strong>NOTE:</strong> The images I used in these examples are random images.{' '}
-            <strong>I do not own any of these images.</strong>
+            <strong>NOTE:</strong> The images I used in these examples are random images that does
+            not have the same dimensions. <strong>I do not own any of these images.</strong>
           </p>
 
           <h3>Features</h3>
@@ -68,16 +74,23 @@ class App extends Component {
           </a>
         </div>
         <div className="clear-float box">
-          <h1>Floating carousel These images will change after 5 seconds</h1>
-          <InfernoCarousel
-            swipeThreshold={150}
-            animationSpeed={300}
-            itemDuration={3000}
-            className="images-carousel">
-            {this.state.floatingCarouselImages.map((src, i) => (
-              <img key={i} src={src} onClick={() => console.log('Floating carousel: img ' + i)} />
-            ))}
-          </InfernoCarousel>
+          <h1>Floating carousel These images will change after 15 seconds</h1>
+          <div>
+            <InfernoCarousel
+              key={this.state.floatingCarouselImages.key}
+              swipeThreshold={150}
+              animationSpeed={300}
+              itemDuration={3000}
+              className="images-carousel">
+              {this.state.floatingCarouselImages.data.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  onClick={() => console.log('Floating carousel: img ' + i)}
+                />
+              ))}
+            </InfernoCarousel>
+          </div>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis non est et
             rutrum. Quisque feugiat vulputate tempus. Vestibulum ante ipsum primis in faucibus orci
