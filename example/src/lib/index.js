@@ -13,10 +13,10 @@ var _inferno = require('inferno');
 function InfernoCarousel (props) {
   var _this = this;
 
-  _this.props = props;
+  this.props = props;
 
-  _this.componentDidMount = function () {
-    window.jscarousel(_this.carouselContainer, {
+  this.componentDidMount = function () {
+    _this.stop = window.jscarousel(_this.carouselContainer, {
       noClone: true,
       animationSpeed: _this.props.animationSpeed,
       itemDuration: _this.props.itemDuration,
@@ -24,7 +24,13 @@ function InfernoCarousel (props) {
     });
   };
 
-  _this.render = function () {
+  this.componenWillUnmount = function () {
+    if (_this.stop) {
+      _this.stop();
+    }
+  };
+
+  this.render = function () {
     return (0, _inferno.createVNode)(
       1,
       'div',
